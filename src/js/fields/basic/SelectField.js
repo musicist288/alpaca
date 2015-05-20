@@ -204,6 +204,39 @@
         },
 
         /**
+         * @see Alpaca.ControlField#postRender
+         */
+        postRender: function(callback) {
+
+            var self = this;
+
+            this.base(function ()
+            {
+
+               if (self.control)
+               {
+                   self.applyComboBox();
+               }
+
+               callback();
+
+            });
+
+        },
+
+        applyComboBox: function () {
+
+            var self = this;
+
+            if (self.options.combobox)
+            {
+                var options = Alpaca.merge({bsVersion: '3'}, self.options.combobox);
+                $(self.getControlEl()).combobox(options);
+            }
+
+        },
+
+        /**
          * Validate against enum property.
          *
          * @returns {Boolean} True if the element value is part of the enum list, false otherwise.
